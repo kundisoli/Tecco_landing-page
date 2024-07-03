@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Temperature Converter</h1>
+    <label for="temperature">Enter temperature:</label>
+    <input type="text" id="temperature" placeholder="Enter temperature">
+    <select id="unitFrom">
+      <option value="celsius">(°C)</option>
+      <option value="fahrenheit"> (°F)</option>
+      <option value="kelvin">(K)</option>
+    </select>
+    <label for="unitTo">Convert to:</label>
+    <select id="unitTo">
+      <option value="celsius"> (°C)</option>
+      <option value="fahrenheit">(°F)</option>
+      <option value="kelvin"> (K)</option>
+    </select>
+    <button onclick="convertTemperature()">Convert</button>
+    <p id="result"></p>
+  </div>
+
+  <script >function convertTemperature() {
+    var temperatureInput = document.getElementById("temperature").value.trim();
+    var unitFrom = document.getElementById("unitFrom").value;
+    var unitTo = document.getElementById("unitTo").value;
+    var resultElement = document.getElementById("result");
+    resultElement.innerHTML = "";
+  
+    // Validate if input is a number
+    if (isNaN(temperatureInput)) {
+      resultElement.innerHTML = "Please enter a valid number for temperature.";
+      return;
+    }
+  
+    var temperature = parseFloat(temperatureInput);
+    var convertedTemperature;
+  
+    if (unitFrom === "celsius") {
+      if (unitTo === "fahrenheit") {
+        convertedTemperature = (temperature * 9/5) + 32;
+        resultElement.innerHTML = `${temperature}°C is ${convertedTemperature.toFixed(2)}°F`;
+      } else if (unitTo === "kelvin") {
+        convertedTemperature = temperature + 273.15;
+        resultElement.innerHTML = `${temperature}°C is ${convertedTemperature.toFixed(2)}K`;
+      } else {
+        resultElement.innerHTML = `${temperature}°C remains ${temperature}°C`;
+      }
+    } else if (unitFrom === "fahrenheit") {
+      if (unitTo === "celsius") {
+        convertedTemperature = (temperature - 32) * 5/9;
+        resultElement.innerHTML = `${temperature}°F is ${convertedTemperature.toFixed(2)}°C`;
+      } else if (unitTo === "kelvin") {
+        convertedTemperature = (temperature - 32) * 5/9 + 273.15;
+        resultElement.innerHTML = `${temperature}°F is ${convertedTemperature.toFixed(2)}K`;
+      } else {
+        resultElement.innerHTML = `${temperature}°F remains ${temperature}°F`;
+      }
+    } else if (unitFrom === "kelvin") {
+      if (unitTo === "celsius") {
+        convertedTemperature = temperature - 273.15;
+        resultElement.innerHTML = `${temperature}K is ${convertedTemperature.toFixed(2)}°C`;
+      } else if (unitTo === "fahrenheit") {
+        convertedTemperature = (temperature - 273.15) * 9/5 + 32;
+        resultElement.innerHTML = `${temperature}K is ${convertedTemperature.toFixed(2)}°F`;
+      } else {
+        resultElement.innerHTML = `${temperature}K remains ${temperature}K`;
+      }
+    }
+  }
+  </script>
+</body>
+</html>
+
+csss----
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    box-sizing: border-box;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  #result {
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
